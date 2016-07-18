@@ -7,7 +7,7 @@ export interface IShape { x: number; y: number; width: number; height: number;
 
 export class Shape extends React.Component<IShape, {}> {
     mouseMoveF:any = this.onMouseMove.bind(this);
-    state = { id: this.props.id, p: this.props.onChange }
+    state = { id: this.props.id, eventDispatcher: this.props.onChange }
 
     startDrug() {
         document.addEventListener("mouseup", this.onMouseUp.bind(this));
@@ -16,10 +16,15 @@ export class Shape extends React.Component<IShape, {}> {
 
     onMouseMove(event:MouseEvent) {
         console.log(this.state.id);
-        this.state.p(this.state.id, event.pageX, event.pageY);
+        this.state.eventDispatcher('mouseMove', {id:this.state.id, x:event.pageX, y:event.pageY});
     }
 
     onMouseUp(event:MouseEvent) {
         document.removeEventListener("mousemove",  this.mouseMoveF);
+    }
+
+    dbClick(event:MouseEvent) {
+        console.log('dbClick');
+        this.state.eventDispatcher('dblClick', {id:this.state.id, isAlt:event.altKey});
     }
 }

@@ -8,7 +8,7 @@ export class Triangle extends Shape {
         let left = `${this.props.x - this.props.width/2} ${this.props.y + this.props.height / 2}`;
         let right = `${this.props.x + this.props.width/2} ${this.props.y + this.props.height / 2}`;
         let points = `${top}, ${left}, ${right}`;
-        return <polygon points={ points } stroke="white" onMouseDown={this.startDrug.bind(this)}/>
+        return <polygon points={ points } stroke="white" onMouseDown={this.startDrug.bind(this)} onDoubleClick={this.dbClick.bind(this)}/>
     }
 }
 
