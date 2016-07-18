@@ -1,0 +1,8 @@
+.draggable {
+    cursor: move;
+}
+.panel {
+    background-color: #1890AB;
+    width: 100%;
+    height: 100px;
+}

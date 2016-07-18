@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist/",
+    "sourceMap": true,
+    "noImplicitAny": false,
+    "module": "commonjs",
+    "target": "es5",
+    "jsx": "react",
+    "experimentalDecorators": true
+  },
+  "files": [
+    "./typings/index.d.ts",
+    "./src/components/Hello.tsx",
+    "./src/components/Circle.tsx",
+    "./src/index.tsx"
+  ]
+}
