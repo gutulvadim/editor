@@ -1,8 +1,7 @@
-
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { Circle } from "./Circle";
-import { Rectangle } from "./Rectangle";
+import { Circle } from "./shapes/Circle";
+import { Rectangle } from "./shapes/Rectangle";
 
 class ShapeViewer extends React.Component<any, any> {
     constructor(props?, context?) {

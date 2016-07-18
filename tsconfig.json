@@ -10,8 +10,9 @@
   },
   "files": [
     "./typings/index.d.ts",
-    "./src/components/Hello.tsx",
-    "./src/components/Circle.tsx",
+    "./src/components/shapes/Shape.tsx",
+    "./src/components/shapes/Circle.tsx",
+    "./src/components/shapes/Rectangle.tsx",
     "./src/index.tsx"
   ]
 }
