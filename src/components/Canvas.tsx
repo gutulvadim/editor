@@ -9,6 +9,14 @@ class Canvas extends React.Component<any, any> {
         super(props, context);
     }
     render() {
+        var canvasStyle = {
+            display: 'inline-block',
+            backgroundImage: 'url(https://upload.wikimedia.org/wikipedia/commons/7/7c/Lightblue_empty_grid.svg)',
+            float: 'left',
+            overflow: 'hidden',
+            height: 100 + 'vh',
+            width: 90 + '%'
+        };
         var shapes = this.props.shapes.map(function(s) {{}
             switch (s.name) {
                 case 'circle': return <Circle x={s.x} y={s.y} width={s.w} height={s.h} key={s.id} id={s.id} onChange={this.onChange.bind(this)} />;
@@ -17,7 +25,11 @@ class Canvas extends React.Component<any, any> {
             }
         }.bind(this));
 
-        return(<svg className="canvas">{shapes}</svg>);
+        return (
+            <div style={canvasStyle} onDrop={this.onCanvasDrop.bind(this)} onDragOver={this.onCanvasDragOver.bind(this)}>
+                <svg className="canvas">{shapes}</svg>
+            </div>
+        );
     }
 
     onChange(event:String, target:any) {
@@ -34,6 +46,23 @@ class Canvas extends React.Component<any, any> {
 
         }
     }
+
+    onCanvasDrop(ev) {
+        console.log(ev.dataTransfer.getData("shape"));
+        ev.preventDefault();
+        this.props.addShape(
+            ev.dataTransfer.getData("shape"),
+            ev.pageX,
+            ev.pageY,
+            100,
+            100
+        );
+    }
+
+    onCanvasDragOver(ev) {
+        console.log('onCanvasDragOver');
+        ev.preventDefault();
+    }
 }
 
 export default connect(
@@ -41,6 +70,7 @@ export default connect(
     (dispatch) => ({
         updateShape: (id, x, y) => dispatch({ type:'SHAPE_CHANGE', id, x, y}),
         moveBack: (id) => dispatch({ type:'SHAPE_BACK', id}),
-        moveForvard: (id) => dispatch({ type:'SHAPE_FORWARD', id})
+        moveForvard: (id) => dispatch({ type:'SHAPE_FORWARD', id}),
+        addShape: (name, x, y, w, h) => dispatch({ type:'SHAPE_ADD', name, x, y, w, h})
     })
 )(Canvas);

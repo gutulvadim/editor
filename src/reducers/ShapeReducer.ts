@@ -3,13 +3,14 @@ export default (state, action) => {
         case 'SHAPE_ADD':
             var id = state.nextShapeId;
             var shape = Object.assign({}, { id: id }, action);
+            shape.x -= state.paletteWidth;
             delete shape['type'];
             return Object.assign({}, state, { nextShapeId: id + 1, shapes: [...state.shapes, shape] });
 
         case 'SHAPE_CHANGE':
             var shape = state.shapes.filter(x => x.id === action.id)[0];
             var shape_index = state.shapes.indexOf(shape);
-            var new_shape = Object.assign({}, shape, { x: action.x, y: action.y });
+            var new_shape = Object.assign({}, shape, { x: action.x - state.paletteWidth, y: action.y });
             var new_shapes = [...state.shapes];
             new_shapes[shape_index] = new_shape;
             console.log(shape);
