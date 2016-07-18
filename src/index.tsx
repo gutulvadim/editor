@@ -36,9 +36,13 @@ ReactDOM.render( <Provider store={store}>
 );
 document.getElementById("circle").addEventListener('mouseup', onCircleMouseClick);
 document.getElementById("rectangle").addEventListener('mouseup', onRectangleMouseClick);
+document.getElementById("triangle").addEventListener('mouseup', onTriangleMouseClick);
 function onCircleMouseClick() {
     store.dispatch({type: 'SHAPE_ADD', name: 'circle', x:100, y:300, r:50 });
 }
 function onRectangleMouseClick() {
     store.dispatch({type: 'SHAPE_ADD', name: 'rectangle', x:100, y:200, w:100, h:100 });
+}
+function onTriangleMouseClick() {
+    store.dispatch({type: 'SHAPE_ADD', name: 'triangle', x:100, y:200, w:100, h:100 });
 }
