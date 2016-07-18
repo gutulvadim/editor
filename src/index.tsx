@@ -4,7 +4,8 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import { connect, Provider } from 'react-redux';
 import * as ES6 from 'es6-shim';
 
-import  ShapeViewer  from "./components/ShapeViewer";
+import  Canvas  from "./components/Canvas";
+import  Palette  from "./components/Palette";
 
 var actions = [];
 var defaultState = { nextShapeId:0, width: 50, height: 90, color:"#000000", shapes:[] };
@@ -30,19 +31,31 @@ let store = createStore(
     defaultState);
 
 ReactDOM.render( <Provider store={store}>
-        <ShapeViewer/>
+    <div>
+        <Canvas/>
+    </div>
     </Provider>,
     document.getElementById("canvas")
 );
-document.getElementById("circle").addEventListener('mouseup', onCircleMouseClick);
-document.getElementById("rectangle").addEventListener('mouseup', onRectangleMouseClick);
-document.getElementById("triangle").addEventListener('mouseup', onTriangleMouseClick);
-function onCircleMouseClick() {
-    store.dispatch({type: 'SHAPE_ADD', name: 'circle', x:100, y:300, w:100, h:100 });
+function allowDrop(event) {
+
 }
-function onRectangleMouseClick() {
-    store.dispatch({type: 'SHAPE_ADD', name: 'rectangle', x:100, y:200, w:100, h:100 });
+document.getElementById("canvas").addEventListener('drop', onCanvasDrop);
+document.getElementById("canvas").addEventListener('dragover', onCanvasDragOver);
+document.getElementById("circle").addEventListener('dragstart', onDragStart);
+document.getElementById("rectangle").addEventListener('dragstart', onDragStart);
+document.getElementById("triangle").addEventListener('dragstart', onDragStart);
+
+function onCanvasDrop(ev) {
+    console.log(ev.dataTransfer.getData("shape"));
+    ev.preventDefault();
+    store.dispatch({type: 'SHAPE_ADD', name: ev.dataTransfer.getData("shape"), x: ev.pageX, y: ev.pageY, w: 100, h: 100});
 }
-function onTriangleMouseClick() {
-    store.dispatch({type: 'SHAPE_ADD', name: 'triangle', x:100, y:200, w:100, h:100 });
+function onCanvasDragOver(ev) {
+    console.log('onCanvasDragOver');
+    ev.preventDefault();
+}
+function onDragStart(ev) {
+    ev.dataTransfer.setData("shape", ev.target.id);
+    console.log('onDragStart');
 }

@@ -3,7 +3,7 @@ import render = __React.__DOM.render;
 import { connect } from 'react-redux';
 
 export interface IShape { x: number; y: number; width: number; height: number;
-                          id: number; onChange:Function }
+                          id: string; onChange:Function }
 
 export class Shape extends React.Component<IShape, {}> {
     mouseMoveF:any = this.onMouseMove.bind(this);

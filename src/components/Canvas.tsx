@@ -4,7 +4,7 @@ import { Circle } from "./shapes/Circle";
 import { Rectangle } from "./shapes/Rectangle";
 import { Triangle } from "./shapes/Triangle";
 
-class ShapeViewer extends React.Component<any, any> {
+class Canvas extends React.Component<any, any> {
     constructor(props?, context?) {
         super(props, context);
     }
@@ -17,7 +17,7 @@ class ShapeViewer extends React.Component<any, any> {
             }
         }.bind(this));
 
-        return(<svg>{shapes}</svg>);
+        return(<svg className="canvas">{shapes}</svg>);
     }
 }
 
@@ -26,4 +26,4 @@ export default connect(
     (dispatch) => ({
         updateShape: (id, x, y) => dispatch({ type:'SHAPE_CHANGE', id, x, y})
     })
-)(ShapeViewer);
+)(Canvas);
