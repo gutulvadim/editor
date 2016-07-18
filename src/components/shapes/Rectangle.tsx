@@ -9,4 +9,3 @@ export class Rectangle extends Shape {
                      onMouseDown={this.startDrug.bind(this)} onDoubleClick={this.dbClick.bind(this)}/>
     }
 }
-
