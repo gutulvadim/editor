@@ -1,0 +1,24 @@
+.canvas {
+    height:100%;
+    width:100%;
+
+}
+.palette {
+    float: left;
+    overflow: hidden;
+    width:60px;'
+}
+
+.canvas-container {
+    display: inline-block;
+    background: url(grid.svg);
+    float: left;
+    overflow: hidden;
+    height: 100vh;
+    width: 90%;
+}
+
+.shape {
+    fill: #BEEAF3;
+    stroke: blue;
+}

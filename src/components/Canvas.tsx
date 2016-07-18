@@ -9,14 +9,7 @@ class Canvas extends React.Component<any, any> {
         super(props, context);
     }
     render() {
-        var canvasStyle = {
-            display: 'inline-block',
-            backgroundImage: 'url(https://upload.wikimedia.org/wikipedia/commons/7/7c/Lightblue_empty_grid.svg)',
-            float: 'left',
-            overflow: 'hidden',
-            height: 100 + 'vh',
-            width: 90 + '%'
-        };
+
         var shapes = this.props.shapes.map(function(s) {{}
             switch (s.name) {
                 case 'circle': return <Circle x={s.x} y={s.y} width={s.w} height={s.h} key={s.id} id={s.id} onChange={this.onChange.bind(this)} />;
@@ -26,7 +19,7 @@ class Canvas extends React.Component<any, any> {
         }.bind(this));
 
         return (
-            <div style={canvasStyle} onDrop={this.onCanvasDrop.bind(this)} onDragOver={this.onCanvasDragOver.bind(this)}>
+            <div className="canvas-container" onDrop={this.onCanvasDrop.bind(this)} onDragOver={this.onCanvasDragOver.bind(this)}>
                 <svg className="canvas">{shapes}</svg>
             </div>
         );
