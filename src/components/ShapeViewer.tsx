@@ -11,9 +11,9 @@ class ShapeViewer extends React.Component<any, any> {
     render() {
         var shapes = this.props.shapes.map(function(s) {{}
             switch (s.name) {
-                case 'circle': return <Circle x={s.x} y={s.y} r={s.r} key={s.id} id={s.id} p={this.props.updateShape} />;
-                case 'rectangle': return <Rectangle x={s.x} y={s.y} width={s.w} height={s.h} key={s.id} id={s.id} p={this.props.updateShape} />;
-                case 'triangle': return <Triangle x={s.x} y={s.y} width={s.w} height={s.h} key={s.id} id={s.id} p={this.props.updateShape} />;
+                case 'circle': return <Circle x={s.x} y={s.y} width={s.w} height={s.h} key={s.id} id={s.id} onChange={this.props.updateShape} />;
+                case 'rectangle': return <Rectangle x={s.x} y={s.y} width={s.w} height={s.h} key={s.id} id={s.id} onChange={this.props.updateShape} />;
+                case 'triangle': return <Triangle x={s.x} y={s.y} width={s.w} height={s.h} key={s.id} id={s.id} onChange={this.props.updateShape} />;
             }
         }.bind(this));
 

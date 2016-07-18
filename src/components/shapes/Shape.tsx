@@ -2,12 +2,12 @@ import * as React from "react";
 import render = __React.__DOM.render;
 import { connect } from 'react-redux';
 
-export interface IShape { x: number; y: number }
+export interface IShape { x: number; y: number; width: number; height: number;
+                          id: number; onChange:Function }
 
-export class Shape extends React.Component<any, any> {
+export class Shape extends React.Component<IShape, {}> {
     mouseMoveF:any = this.onMouseMove.bind(this);
-    state = { id: this.props.id, p: this.props.p }
-
+    state = { id: this.props.id, p: this.props.onChange }
 
     startDrug() {
         document.addEventListener("mouseup", this.onMouseUp.bind(this));

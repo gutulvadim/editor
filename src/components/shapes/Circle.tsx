@@ -5,7 +5,8 @@ import { Shape } from './Shape';
 
 export class Circle extends Shape {
     render() {
-        return <circle id={this.props.id} cx={this.props.x} cy={this.props.y} r={this.props.r}
+        let radius = Math.min(this.props.height, this.props.width) / 2;
+        return <circle id={this.props.id} cx={this.props.x} cy={this.props.y} r={radius}
                        className="draggable" stroke="white" onMouseDown={this.startDrug.bind(this)}/>
     }
 }
