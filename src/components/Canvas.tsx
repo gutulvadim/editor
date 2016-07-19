@@ -4,7 +4,6 @@ import { Circle } from "./shapes/Circle";
 import { Square } from "./shapes/Square";
 import { Triangle } from "./shapes/Triangle";
 import { Actions } from "../reducers/ShapeReducer";
-import { Event as ShapeEvent } from "./shapes/Shape";
 import {IShape} from "./shapes/Shape";
 
 export interface ICanvasState {
@@ -14,10 +13,10 @@ export interface ICanvasState {
 }
 
 export interface ICanvasDispatcher {
-    updateShape?: Function,
-    moveForward?: Function,
-    moveBack?: Function,
-    addShape?: Function
+    addShape?: Function,
+    moveShape?: Function,
+    bringForward?: Function,
+    pushBack?: Function
 }
 
 export interface ICanvas extends ICanvasState, ICanvasDispatcher {
@@ -27,8 +26,10 @@ class Canvas extends React.Component<ICanvas, {}> {
     constructor(props?, context?) {
         super(props, context);
     }
+
     shapeAttributes(s) {
-        return { x: s.x, y: s.y, width: s.w, height: s.h, key: s.id, id: s.id, onChange: this.onChange.bind(this)};
+        return { x: s.x, y: s.y, width: s.w, height: s.h, key: s.id, id: s.id,
+                 onDrop: this.props.moveShape, onBringForward: this.props.bringForward, onPushBack: this.props.pushBack};
     }
 
     generateShape(shape_data) {
@@ -53,21 +54,6 @@ class Canvas extends React.Component<ICanvas, {}> {
         );
     }
 
-    onChange(event:ShapeEvent, target:{id: string, x?: number, y?:number, isAlt?:boolean}) {
-        if (event == ShapeEvent.DROP) {
-            this.props.updateShape(target.id, target.x, target.y);
-        }
-        if (event == ShapeEvent.DBL_CLICK) {
-            console.log(target);
-            if (target.isAlt) {
-                this.props.moveBack(target.id);
-            } else {
-                this.props.moveForward(target.id);
-            }
-
-        }
-    }
-
     onCanvasDrop(ev) {
         console.log(ev.dataTransfer.getData("shape"));
         ev.preventDefault();
@@ -89,9 +75,9 @@ class Canvas extends React.Component<ICanvas, {}> {
 export default connect(
     (state):ICanvasState => ({ shapes: state.shapes, shapeHeight: state.shapeHeight, shapeWidth: state.shapeWidth }),
     (dispatch):ICanvasDispatcher => ({
-        updateShape: (id, x, y) => dispatch({ type:Actions.SHAPE_CHANGE, id, x, y}),
-        moveBack: (id) => dispatch({ type:Actions.SHAPE_BACK, id}),
-        moveForward: (id) => dispatch({ type:Actions.SHAPE_FORWARD, id}),
+        moveShape: (id, x, y) => dispatch({ type:Actions.SHAPE_CHANGE, id, x, y}),
+        pushBack: (id) => dispatch({ type:Actions.SHAPE_BACK, id}),
+        bringForward: (id) => dispatch({ type:Actions.SHAPE_FORWARD, id}),
         addShape: (name, x, y, w, h) => dispatch({ type:Actions.SHAPE_ADD, name, x, y, w, h})
     })
 )(Canvas);
