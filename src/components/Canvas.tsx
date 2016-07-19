@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { Circle } from "./shapes/Circle";
-import { Rectangle } from "./shapes/Rectangle";
+import { Square } from "./shapes/Square";
 import { Triangle } from "./shapes/Triangle";
 import { Shape } from "./shapes/Shape";
 import {Actions} from "../reducers/ShapeReducer";
@@ -21,7 +21,7 @@ class Canvas extends React.Component<any, any> {
             case 'circle':
                 return <Circle {...attributes} />;
             case 'rectangle':
-                return <Rectangle { ...attributes } />;
+                return <Square { ...attributes } />;
             case 'triangle':
                 return <Triangle { ...attributes } />;
         }
@@ -59,8 +59,8 @@ class Canvas extends React.Component<any, any> {
             ev.dataTransfer.getData("shape"),
             ev.pageX,
             ev.pageY,
-            100,
-            100
+            this.props.shapeHeight,
+            this.props.shapeWidth
         );
     }
 
@@ -71,7 +71,7 @@ class Canvas extends React.Component<any, any> {
 }
 
 export default connect(
-    (state) => ({ shapes: state.shapes }),
+    (state) => ({ shapes: state.shapes, shapeHeight: state.shapeHeight, shapeWidth: state.shapeWidth }),
     (dispatch) => ({
         updateShape: (id, x, y) => dispatch({ type:Actions.SHAPE_CHANGE, id, x, y}),
         moveBack: (id) => dispatch({ type:Actions.SHAPE_BACK, id}),

@@ -12,8 +12,10 @@
     "./typings/index.d.ts",
     "./src/components/shapes/Shape.tsx",
     "./src/components/shapes/Circle.tsx",
-    "./src/components/shapes/Rectangle.tsx",
+    "./src/components/shapes/Square.tsx",
     "./src/components/shapes/Triangle.tsx",
+    "./src/components/Pane.tsx",
+    "./src/components/Palette.tsx",
     "./src/index.tsx"
   ]
 }

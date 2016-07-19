@@ -1,15 +1,13 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { createStore, applyMiddleware, compose } from 'redux';
-import { connect, Provider } from 'react-redux';
-import * as ES6 from 'es6-shim';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
 import { Pane }  from "./components/Pane";
 import shapeReducer from './reducers/ShapeReducer';
 
-var actions = [];
-var defaultState = { nextShapeId:0, paletteWidth:60, shapes:[] };
-
+let defaultState = { nextShapeId:0, paletteWidth:60, shapeWidth:100, shapeHeight:100, shapes:[] };
 let store = createStore(shapeReducer, defaultState);
+
 ReactDOM.render(
     <Provider store={store}>
         <Pane />

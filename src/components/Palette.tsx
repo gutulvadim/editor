@@ -15,7 +15,7 @@ export class Palette extends React.Component<PaletteProps, {}> {
                 </Tool>
                 <Tool id="triangle">
                     <svg width='100%' height='100%' viewBox="0 0 100 100" preserveAspectRatio="none">
-                        <polygon points="50 0, 0 100, 100 100" pointerEvents="all" className="shape"/>
+                        <polygon points="50 0, 0 100, 100 100" className="shape"/>
                     </svg>
                 </Tool>
             </div>
