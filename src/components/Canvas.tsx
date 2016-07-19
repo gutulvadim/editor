@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Circle } from "./shapes/Circle";
 import { Rectangle } from "./shapes/Rectangle";
 import { Triangle } from "./shapes/Triangle";
+import { Shape } from "./shapes/Shape";
 import {Actions} from "../reducers/ShapeReducer";
 import {Event as ShapeEvent} from "./shapes/Shape";
 
@@ -10,15 +11,24 @@ class Canvas extends React.Component<any, any> {
     constructor(props?, context?) {
         super(props, context);
     }
-    render() {
+    shapeAttributes(s) {
+        return { x: s.x, y: s.y, width: s.w, height: s.h, key: s.id, id: s.id, onChange: this.onChange.bind(this)};
+    }
 
-        var shapes = this.props.shapes.map(function(s) {{}
-            switch (s.name) {
-                case 'circle': return <Circle x={s.x} y={s.y} width={s.w} height={s.h} key={s.id} id={s.id} onChange={this.onChange.bind(this)} />;
-                case 'rectangle': return <Rectangle x={s.x} y={s.y} width={s.w} height={s.h} key={s.id} id={s.id} onChange={this.onChange.bind(this)} />;
-                case 'triangle': return <Triangle x={s.x} y={s.y} width={s.w} height={s.h} key={s.id} id={s.id} onChange={this.onChange.bind(this)} />;
-            }
-        }.bind(this));
+    generateShape(shape_data) {
+        let attributes = this.shapeAttributes(shape_data)
+        switch (shape_data.name) {
+            case 'circle':
+                return <Circle {...attributes} />;
+            case 'rectangle':
+                return <Rectangle { ...attributes } />;
+            case 'triangle':
+                return <Triangle { ...attributes } />;
+        }
+    }
+
+    render() {
+        let shapes = this.props.shapes.map(this.generateShape.bind(this));
 
         return (
             <div className="canvas-container" onDrop={this.onCanvasDrop.bind(this)} onDragOver={this.onCanvasDragOver.bind(this)}>
