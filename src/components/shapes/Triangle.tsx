@@ -4,9 +4,9 @@ import {Shape} from "./Shape";
 
 export class Triangle extends Shape {
     render() {
-        let top = `${this.props.x} ${this.props.y - this.props.height / 2}`;
-        let left = `${this.props.x - this.props.width / 2} ${this.props.y + this.props.height / 2}`;
-        let right = `${this.props.x + this.props.width / 2} ${this.props.y + this.props.height / 2}`;
+        let top = `${this.state.x} ${this.state.y - this.props.height / 2}`;
+        let left = `${this.state.x - this.props.width / 2} ${this.state.y + this.props.height / 2}`;
+        let right = `${this.state.x + this.props.width / 2} ${this.state.y + this.props.height / 2}`;
         let points = `${top}, ${left}, ${right}`;
         return (
             <polygon points={ points } stroke="white" onMouseDown={this.startDrug.bind(this)}

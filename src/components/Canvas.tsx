@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { Circle } from "./shapes/Circle";
 import { Rectangle } from "./shapes/Rectangle";
 import { Triangle } from "./shapes/Triangle";
+import {Actions} from "../reducers/ShapeReducer";
+import {Event as ShapeEvent} from "./shapes/Shape";
 
 class Canvas extends React.Component<any, any> {
     constructor(props?, context?) {
@@ -25,11 +27,11 @@ class Canvas extends React.Component<any, any> {
         );
     }
 
-    onChange(event:String, target:any) {
-        if (event == "mouseMove") {
+    onChange(event:ShapeEvent, target:any) {
+        if (event == ShapeEvent.DROP) {
             this.props.updateShape(target.id, target.x, target.y);
         }
-        if (event == "dblClick") {
+        if (event == ShapeEvent.DBL_CLICK) {
             console.log(target);
             if (target.isAlt) {
                 this.props.moveBack(target.id);
@@ -61,9 +63,9 @@ class Canvas extends React.Component<any, any> {
 export default connect(
     (state) => ({ shapes: state.shapes }),
     (dispatch) => ({
-        updateShape: (id, x, y) => dispatch({ type:'SHAPE_CHANGE', id, x, y}),
-        moveBack: (id) => dispatch({ type:'SHAPE_BACK', id}),
-        moveForvard: (id) => dispatch({ type:'SHAPE_FORWARD', id}),
-        addShape: (name, x, y, w, h) => dispatch({ type:'SHAPE_ADD', name, x, y, w, h})
+        updateShape: (id, x, y) => dispatch({ type:Actions.SHAPE_CHANGE, id, x, y}),
+        moveBack: (id) => dispatch({ type:Actions.SHAPE_BACK, id}),
+        moveForvard: (id) => dispatch({ type:Actions.SHAPE_FORWARD, id}),
+        addShape: (name, x, y, w, h) => dispatch({ type:Actions.SHAPE_ADD, name, x, y, w, h})
     })
 )(Canvas);
