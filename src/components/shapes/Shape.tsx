@@ -7,7 +7,9 @@ export interface IShapeDispatcher {
     pushBack?: (id: number) => void
 }
 
-export interface IShape extends IShapeDispatcher { x: number; y: number; width: number; height: number; id: string; }
+export interface IShapeData { x: number; y: number; width: number; height: number; id: string; name?: string}
+
+export interface IShape extends IShapeDispatcher, IShapeData {}
 
 export class Shape extends React.Component<IShape, {}> {
     mouseMove:EventListener = this.onMouseMove.bind(this);

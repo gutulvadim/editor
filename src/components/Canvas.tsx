@@ -1,11 +1,10 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { Circle } from "./shapes/Circle";
-import { Square } from "./shapes/Square";
-import { Triangle } from "./shapes/Triangle";
 import { Actions } from "../reducers/ShapeReducer";
-import {IShape} from "./shapes/Shape";
+import {IShape, Shape} from "./shapes/Shape";
 import {IShapeDispatcher} from "./shapes/Shape";
+import {ShapeFactory} from "./shapes/ShapeFactory";
+import {IShapeData} from "./shapes/Shape";
 
 export interface ICanvasState {
     shapes?: IShape[],
@@ -25,21 +24,11 @@ class Canvas extends React.Component<ICanvas, {}> {
         super(props, context);
     }
 
-    shapeAttributes(s) {
-        return { x: s.x, y: s.y, width: s.w, height: s.h, key: s.id, id: s.id,
-            moveShape: this.props.moveShape, bringForward: this.props.bringForward, pushBack: this.props.pushBack};
-    }
-
-    generateShape(shape_data) {
-        let attributes = this.shapeAttributes(shape_data)
-        switch (shape_data.name) {
-            case 'circle':
-                return <Circle { ...attributes } />;
-            case 'rectangle':
-                return <Square { ...attributes } />;
-            case 'triangle':
-                return <Triangle { ...attributes } />;
-        }
+    generateShape(shape_data:IShapeData) {
+        let dispatcher:IShapeDispatcher = {moveShape: this.props.moveShape,
+                                            bringForward: this.props.bringForward,
+                                            pushBack: this.props.pushBack}
+        return ShapeFactory.createShape(shape_data, dispatcher);
     }
 
     render() {
