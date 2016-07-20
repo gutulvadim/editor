@@ -1,4 +1,5 @@
 import * as React from "react";
+import * as ReactDOM from "react-dom";
 
 export interface IShape { x: number; y: number; width: number; height: number; id: string;
                           onDrop: Function, onBringForward: Function, onPushBack: Function
@@ -12,6 +13,14 @@ export class Shape extends React.Component<IShape, {}> {
     startDrug() {
         document.addEventListener("mouseup", this.mouseUp);
         document.addEventListener("mousemove", this.mouseMove);
+    }
+
+    componentDidMount() {
+        let domElement = ReactDOM.findDOMNode(this);
+        domElement.addEventListener("mousedown", this.startDrug.bind(this));
+        domElement.addEventListener("dblclick", this.dbClick.bind(this));
+        domElement.classList.add("shape");
+        console.log('componentDidMount');
     }
 
     onMouseMove(event:MouseEvent) {
@@ -32,6 +41,11 @@ export class Shape extends React.Component<IShape, {}> {
         } else {
             this.props.onBringForward(this.props.id);
         }
+    }
+
+    onContextMenu(event:Event) {
+        console.log("onContextMenu");
+        event.preventDefault();
     }
 
     static isOnDocument(x:number, y:number) {
