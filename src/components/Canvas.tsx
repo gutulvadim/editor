@@ -53,7 +53,6 @@ class Canvas extends React.Component<ICanvas, {}> {
     }
 
     onCanvasDrop(ev) {
-        console.log(ev.dataTransfer.getData("shape"));
         ev.preventDefault();
         this.props.addShape(
             ev.dataTransfer.getData("shape"),
@@ -65,7 +64,6 @@ class Canvas extends React.Component<ICanvas, {}> {
     }
 
     onCanvasDragOver(ev) {
-        console.log('onCanvasDragOver');
         ev.preventDefault();
     }
 }

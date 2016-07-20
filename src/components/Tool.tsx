@@ -16,6 +16,5 @@ export class Tool extends React.Component<ToolProps, {}> {
     }
     onDragStart(ev) {
         ev.dataTransfer.setData("shape", ev.target.id);
-        console.log('onDragStart');
     }
 }

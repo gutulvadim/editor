@@ -16,10 +16,12 @@ export class Shape extends React.Component<IShape, {}> {
     xDelta = 0; yDelta = 0;
 
     onMouseDown(event:MouseEvent) {
-        this.xDelta = this.state.x - event.layerX;
-        this.yDelta = this.state.y - event.layerY;
-        document.addEventListener("mouseup", this.mouseUp);
-        document.addEventListener("mousemove", this.mouseMove);
+        if (event.which == 1) {
+            this.xDelta = this.state.x - event.layerX;
+            this.yDelta = this.state.y - event.layerY;
+            document.addEventListener("mouseup", this.mouseUp);
+            document.addEventListener("mousemove", this.mouseMove);
+        }
     }
 
     componentDidMount() {
@@ -27,7 +29,6 @@ export class Shape extends React.Component<IShape, {}> {
         domElement.addEventListener("mousedown", this.onMouseDown.bind(this));
         domElement.addEventListener("dblclick", this.dbClick.bind(this));
         domElement.classList.add("shape");
-        console.log('componentDidMount');
     }
 
     onMouseMove(event:MouseEvent) {
