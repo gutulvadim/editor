@@ -6,12 +6,12 @@ import  Canvas  from "./Canvas";
 export interface PaneProps { }
 
 export class Pane extends React.Component<PaneProps, {}> {
-    render() {
-        return (
-            <div>
-                <Palette />
-                <Canvas />
-            </div>
-        );
-    }
+  render() {
+    return (
+      <div>
+        <Palette />
+        <Canvas />
+      </div>
+    );
+  }
 }

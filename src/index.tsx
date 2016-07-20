@@ -9,8 +9,8 @@ let defaultState = { nextShapeId:0, paletteWidth:60, shapeWidth:100, shapeHeight
 let store = createStore(shapeReducer, defaultState);
 
 ReactDOM.render(
-    <Provider store={store}>
-        <Pane />
-    </Provider>,
-    document.getElementById("pane")
+  <Provider store={store}>
+    <Pane />
+  </Provider>,
+  document.getElementById("pane")
 );
