@@ -15,7 +15,7 @@ export class Shape extends React.Component<IShape, {}> {
     state = { x: this.props.x, y: this.props.y }
     xDelta = 0; yDelta = 0;
 
-    startDrug(event:MouseEvent) {
+    onMouseDown(event:MouseEvent) {
         this.xDelta = this.state.x - event.layerX;
         this.yDelta = this.state.y - event.layerY;
         document.addEventListener("mouseup", this.mouseUp);
@@ -24,7 +24,7 @@ export class Shape extends React.Component<IShape, {}> {
 
     componentDidMount() {
         let domElement = ReactDOM.findDOMNode(this);
-        domElement.addEventListener("mousedown", this.startDrug.bind(this));
+        domElement.addEventListener("mousedown", this.onMouseDown.bind(this));
         domElement.addEventListener("dblclick", this.dbClick.bind(this));
         domElement.classList.add("shape");
         console.log('componentDidMount');
