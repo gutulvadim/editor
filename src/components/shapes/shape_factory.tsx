@@ -8,6 +8,7 @@ import Element = JSX.Element;
 
 export class ShapeFactory {
   static createShape(shapeData:IShapeData, dispatcher:IShapeDispatcher):Element {
+    console.log(dispatcher);
     let attributes = this.shapeAttributes(shapeData, dispatcher);
 
     switch (shapeData.name) {
