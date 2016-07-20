@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { Actions } from "../reducers/ShapeReducer";
-import {IShape, Shape} from "./shapes/Shape";
-import {IShapeDispatcher} from "./shapes/Shape";
-import {ShapeFactory} from "./shapes/ShapeFactory";
-import {IShapeData} from "./shapes/Shape";
+import { Actions } from "../reducers/shape_reducer";
+import {IShape, Shape} from "./shapes/shape";
+import {IShapeDispatcher} from "./shapes/shape";
+import {ShapeFactory} from "./shapes/shape_factory";
+import {IShapeData} from "./shapes/shape";
 
 export interface ICanvasState {
   shapes?: IShape[],

@@ -1,7 +1,7 @@
 import * as React from "react";
 
-import { Palette } from "./Palette";
-import  Canvas  from "./Canvas";
+import { Palette } from "./palette";
+import  Canvas  from "./canvas";
 
 export interface PaneProps { }
 

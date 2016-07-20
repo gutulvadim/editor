@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Tool } from "./Tool";
+import { Tool } from "./tool";
 
 export interface PaletteProps { }
 

@@ -1,5 +1,5 @@
 import * as React from "react";
-import {Shape} from "./Shape";
+import {Shape} from "./shape";
 
 export class Square extends Shape {
   render() {

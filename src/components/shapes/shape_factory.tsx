@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { Circle } from "./Circle";
-import { Square } from "./Square";
-import { Triangle } from "./Triangle";
-import {IShapeDispatcher} from "./Shape";
-import {IShapeData} from "./Shape";
+import { Circle } from "./circle";
+import { Square } from "./square";
+import { Triangle } from "./triangle";
+import {IShapeDispatcher} from "./shape";
+import {IShapeData} from "./shape";
 import Element = JSX.Element;
 
 export class ShapeFactory {
