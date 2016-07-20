@@ -1,7 +1,7 @@
 export enum Actions
 {
     SHAPE_ADD,
-    SHAPE_CHANGE,
+    SHAPE_MOVE,
     SHAPE_BACK,
     SHAPE_FORWARD
 }
@@ -11,8 +11,8 @@ export default (state, action) => {
         case Actions.SHAPE_ADD:
             return addShape(state, action);
 
-        case Actions.SHAPE_CHANGE:
-            return changeShape(state, action);
+        case Actions.SHAPE_MOVE:
+            return moveShape(state, action);
 
         case Actions.SHAPE_BACK:
             return shapeBack(state, action);
@@ -39,7 +39,7 @@ function addShape(state, action) {
     return Object.assign({}, state, {nextShapeId: id + 1, shapes: [...state.shapes, shape]});
 }
 
-function changeShape(state, action) {
+function moveShape(state, action) {
     let shapeIndex = getShapeIndex(state.shapes, action.id);
     let new_shape = Object.assign({}, state.shapes[shapeIndex], {x: action.x, y: action.y});
     let new_shapes = [...state.shapes];

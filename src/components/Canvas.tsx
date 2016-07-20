@@ -5,6 +5,7 @@ import { Square } from "./shapes/Square";
 import { Triangle } from "./shapes/Triangle";
 import { Actions } from "../reducers/ShapeReducer";
 import {IShape} from "./shapes/Shape";
+import {IShapeDispatcher} from "./shapes/Shape";
 
 export interface ICanvasState {
     shapes?: IShape[],
@@ -12,11 +13,8 @@ export interface ICanvasState {
     shapeWidth?: number
 }
 
-export interface ICanvasDispatcher {
-    addShape?: Function,
-    moveShape?: Function,
-    bringForward?: Function,
-    pushBack?: Function
+export interface ICanvasDispatcher extends IShapeDispatcher{
+    addShape?: (name: string, x: number, y: number, w: number, h: number) => void,
 }
 
 export interface ICanvas extends ICanvasState, ICanvasDispatcher {
@@ -29,7 +27,7 @@ class Canvas extends React.Component<ICanvas, {}> {
 
     shapeAttributes(s) {
         return { x: s.x, y: s.y, width: s.w, height: s.h, key: s.id, id: s.id,
-                 onDrop: this.props.moveShape, onBringForward: this.props.bringForward, onPushBack: this.props.pushBack};
+            moveShape: this.props.moveShape, bringForward: this.props.bringForward, pushBack: this.props.pushBack};
     }
 
     generateShape(shape_data) {
@@ -75,9 +73,9 @@ class Canvas extends React.Component<ICanvas, {}> {
 export default connect(
     (state):ICanvasState => ({ shapes: state.shapes, shapeHeight: state.shapeHeight, shapeWidth: state.shapeWidth }),
     (dispatch):ICanvasDispatcher => ({
-        moveShape: (id, x, y) => dispatch({ type:Actions.SHAPE_CHANGE, id, x, y}),
-        pushBack: (id) => dispatch({ type:Actions.SHAPE_BACK, id}),
-        bringForward: (id) => dispatch({ type:Actions.SHAPE_FORWARD, id}),
-        addShape: (name, x, y, w, h) => dispatch({ type:Actions.SHAPE_ADD, name, x, y, w, h})
+        moveShape: (id: number, x: number, y: number) => dispatch({ type:Actions.SHAPE_MOVE, id, x, y}),
+        pushBack: (id: number) => dispatch({ type:Actions.SHAPE_BACK, id}),
+        bringForward: (id: number) => dispatch({ type:Actions.SHAPE_FORWARD, id}),
+        addShape: (name: string , x: number, y: number, w: number, h: number) => dispatch({ type:Actions.SHAPE_ADD, name, x, y, w, h})
     })
 )(Canvas);
