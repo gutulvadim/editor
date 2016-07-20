@@ -2,18 +2,15 @@ import * as React from 'react';
 import { Circle } from "./Circle";
 import { Square } from "./Square";
 import { Triangle } from "./Triangle";
-import {IShape} from "./Shape";
-import {Shape} from "./Shape";
 import {IShapeDispatcher} from "./Shape";
-import Component = __React.Component;
 import {IShapeData} from "./Shape";
 import Element = JSX.Element;
 
 export class ShapeFactory {
-    static createShape(shape_data:IShapeData, dispatcher:IShapeDispatcher):Element {
-        let attributes = this.shapeAttributes(shape_data, dispatcher);
+    static createShape(shapeData:IShapeData, dispatcher:IShapeDispatcher):Element {
+        let attributes = this.shapeAttributes(shapeData, dispatcher);
 
-        switch (shape_data.name) {
+        switch (shapeData.name) {
             case 'circle':
                 return <Circle { ...attributes }/>;
             case 'rectangle':
@@ -23,8 +20,8 @@ export class ShapeFactory {
         }
     }
 
-    static shapeAttributes(s, dispatcher: IShapeDispatcher) {
-        return { x: s.x, y: s.y, width: s.w, height: s.h, key: s.id, id: s.id,
+    static shapeAttributes(s:IShapeData, dispatcher: IShapeDispatcher) {
+        return { x: s.x, y: s.y, width: s.width, height: s.height, key: s.id, id: s.id,
             moveShape: dispatcher.moveShape, bringForward: dispatcher.bringForward, pushBack: dispatcher.pushBack };
     }
 }

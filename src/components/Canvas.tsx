@@ -24,11 +24,11 @@ class Canvas extends React.Component<ICanvas, {}> {
         super(props, context);
     }
 
-    generateShape(shape_data:IShapeData) {
+    generateShape(shapeData:IShapeData) {
         let dispatcher:IShapeDispatcher = {moveShape: this.props.moveShape,
                                             bringForward: this.props.bringForward,
                                             pushBack: this.props.pushBack}
-        return ShapeFactory.createShape(shape_data, dispatcher);
+        return ShapeFactory.createShape(shapeData, dispatcher);
     }
 
     render() {
@@ -41,19 +41,19 @@ class Canvas extends React.Component<ICanvas, {}> {
         );
     }
 
-    onCanvasDrop(ev) {
-        ev.preventDefault();
+    onCanvasDrop(event) {
+        event.preventDefault();
         this.props.addShape(
-            ev.dataTransfer.getData("shape"),
-            ev.pageX,
-            ev.pageY,
+            event.dataTransfer.getData("shape"),
+            event.pageX,
+            event.pageY,
             this.props.shapeHeight,
             this.props.shapeWidth
         );
     }
 
-    onCanvasDragOver(ev) {
-        ev.preventDefault();
+    onCanvasDragOver(event) {
+        event.preventDefault();
     }
 }
 
@@ -63,6 +63,7 @@ export default connect(
         moveShape: (id: number, x: number, y: number) => dispatch({ type:Actions.SHAPE_MOVE, id, x, y}),
         pushBack: (id: number) => dispatch({ type:Actions.SHAPE_BACK, id}),
         bringForward: (id: number) => dispatch({ type:Actions.SHAPE_FORWARD, id}),
-        addShape: (name: string , x: number, y: number, w: number, h: number) => dispatch({ type:Actions.SHAPE_ADD, name, x, y, w, h})
+        addShape: (name: string , x: number, y: number, width: number, height: number) =>
+            dispatch({ type:Actions.SHAPE_ADD, name, x, y, width, height})
     })
 )(Canvas);
