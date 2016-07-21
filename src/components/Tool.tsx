@@ -7,9 +7,7 @@ export class Tool extends React.Component<ToolProps, {}> {
     return (
       <span draggable="true" className="tool" id={this.props.id} onDragStart={this.onDragStart}>
         <svg className="tool">
-          before
             {this.props.children}
-          after
         </svg>
       </span>
     );
