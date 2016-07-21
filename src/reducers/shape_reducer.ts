@@ -26,23 +26,23 @@ export default (state: IShapeState, action: IShapeAction): IShapeState => {
       return moveShape(state, action);
 
     case Actions.SHAPE_BACK:
-      return shapeBack(state, action);
+      return pushBack(state, action);
 
     case Actions.SHAPE_FORWARD:
-      return shapeForward(state, action);
+      return bringForward(state, action);
 
     default:
       return state;
   }
 }
 
-function getShapeIndex(shapes, id) {
+function getShapeIndex(shapes: IShapeData[], id: number): number {
   return shapes.findIndex(shape => shape.id === id);
 }
 
 function addShape(state: IShapeState, action: IShapeAction): IShapeState {
   let id = state.nextShapeId;
-  let shape = Object.assign({}, {id: id}, action);
+  let shape = Object.assign({}, { id }, action);
   shape.x -= state.paletteWidth;
   delete shape['type'];
   return Object.assign({}, state, {nextShapeId: id + 1, shapes: [...state.shapes, shape]});
@@ -57,7 +57,7 @@ function moveShape(state: IShapeState, action: IShapeAction): IShapeState {
   return Object.assign({}, state, {shapes: newShapes});
 }
 
-function shapeBack(state: IShapeState, action: IShapeAction): IShapeState {
+function pushBack(state: IShapeState, action: IShapeAction): IShapeState {
   let shapeIndex = getShapeIndex(state.shapes, action.id);
   if (shapeIndex == 0 || state.shapes.length <= 1) {
     return state;
@@ -68,7 +68,7 @@ function shapeBack(state: IShapeState, action: IShapeAction): IShapeState {
   return Object.assign({}, state, {shapes: newShapes});
 }
 
-function shapeForward(state: IShapeState, action: IShapeAction): IShapeState {
+function bringForward(state: IShapeState, action: IShapeAction): IShapeState {
   let shapeIndex = getShapeIndex(state.shapes, action.id);
   if (state.shapes.length <= 1 || shapeIndex == state.shapes.length - 1) {
     return state;
