@@ -4,6 +4,7 @@
   "description": "demo photo editor",
   "main": "./dist/bundle.js",
   "scripts": {
+    "postinstall": "typings install",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Gutul Vadim",
