@@ -37,9 +37,7 @@ export default (state: IShapeState, action: IShapeAction): IShapeState => {
 }
 
 function getShapeIndex(shapes, id) {
-  let shape = shapes.filter(shape => shape.id === id)[0];
-
-  return shapes.indexOf(shape);
+  return shapes.findIndex(shape => shape.id === id);
 }
 
 function addShape(state: IShapeState, action: IShapeAction): IShapeState {
