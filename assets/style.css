@@ -1,43 +1,43 @@
 .canvas {
-    height:100%;
-    width:100%;
+  height:100%;
+  width:100%;
 
 }
 .palette {
-    float: left;
-    overflow: hidden;
-    width:60px;
+  float: left;
+  overflow: hidden;
+  width:60px;
 }
 
 .canvas-container {
-    background: url(grid.svg);
-    float: none;
-    overflow: hidden;
-    height: 100vh;
-    width: auto;
+  background: url(grid.svg);
+  float: none;
+  overflow: hidden;
+  height: 100vh;
+  width: auto;
 }
 
 .shape {
-    fill: #BEEAF3;
-    stroke: blue;
+  fill: #BEEAF3;
+  stroke: blue;
 }
 
 .tool {
-    overflow: hidden;
-    width: 40px;
-    height: 40px;
-    padding: 1px;
-    display: inline-block;
-    cursor: move;
+  overflow: hidden;
+  width: 40px;
+  height: 40px;
+  padding: 1px;
+  display: inline-block;
+  cursor: move;
 }
 
 .tool svg {
-    width: 30px;
-    height: 30px;
-    display: block;
-    position: relative;
-    overflow: hidden;
-    cursor: move;
-    left: 5px;
-    top: 5px;
+  width: 30px;
+  height: 30px;
+  display: block;
+  position: relative;
+  overflow: hidden;
+  cursor: move;
+  left: 5px;
+  top: 5px;
 }
