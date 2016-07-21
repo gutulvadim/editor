@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist/",
+    "sourceMap": true,
+    "noImplicitAny": false,
+    "module": "commonjs",
+    "target": "es5",
+    "jsx": "react",
+    "experimentalDecorators": true
+  },
+  "files": [
+    "./typings/index.d.ts",
+    "./src/components/shapes/shape.tsx",
+    "./src/components/shapes/circle.tsx",
+    "./src/components/shapes/square.tsx",
+    "./src/components/shapes/triangle.tsx",
+    "./src/components/pane.tsx",
+    "./src/components/palette.tsx",
+    "./src/index.tsx"
+  ]
+}
