@@ -8,8 +8,7 @@ import Element = JSX.Element;
 
 export class ShapeFactory {
   static createShape(shapeData:IShapeData, dispatcher:IShapeDispatcher):Element {
-    console.log(dispatcher);
-    let attributes = this.shapeAttributes(shapeData, dispatcher);
+    let attributes = Object.assign({}, shapeData, dispatcher);
 
     switch (shapeData.name) {
       case 'circle':
@@ -19,10 +18,5 @@ export class ShapeFactory {
       case 'triangle':
         return <Triangle { ...attributes } />;
     }
-  }
-
-  static shapeAttributes(s:IShapeData, dispatcher: IShapeDispatcher) {
-    return { x: s.x, y: s.y, width: s.width, height: s.height, key: s.id, id: s.id,
-      moveShape: dispatcher.moveShape, bringForward: dispatcher.bringForward, pushBack: dispatcher.pushBack };
   }
 }
