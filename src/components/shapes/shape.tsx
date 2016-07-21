@@ -8,25 +8,26 @@ export interface IShapeDispatcher {
 }
 
 export interface IShapeData {
-  x: number; y: number; width: number; height: number; id: string; name?: string;
+  x: number; y: number; width: number; height: number; id: number; name?: string;
 }
 
 export interface IShape extends IShapeDispatcher, IShapeData {
 }
 
 export class Shape extends React.Component<IShape, {}> {
-  mouseMove:EventListener = this.onMouseMove.bind(this);
-  mouseUp:EventListener = this.onMouseUp.bind(this);
+  private mouseMove: EventListener = this.onMouseMove.bind(this);
+  private mouseUp: EventListener = this.onMouseUp.bind(this);
+  private xDelta = 0;
+  private yDelta = 0;
+
   state = { x: this.props.x, y: this.props.y }
-  xDelta = 0; yDelta = 0;
 
   onMouseDown(event:MouseEvent) {
-    if (event.which == 1) {
-      this.xDelta = this.state.x - event.layerX;
-      this.yDelta = this.state.y - event.layerY;
-      document.addEventListener("mouseup", this.mouseUp);
-      document.addEventListener("mousemove", this.mouseMove);
-    }
+    if (event.which != 1) return;
+    this.xDelta = this.state.x - event.layerX;
+    this.yDelta = this.state.y - event.layerY;
+    document.addEventListener("mouseup", this.mouseUp);
+    document.addEventListener("mousemove", this.mouseMove);
   }
 
   componentDidMount() {
@@ -45,14 +46,14 @@ export class Shape extends React.Component<IShape, {}> {
   onMouseUp(event:MouseEvent) {
     document.removeEventListener("mousemove", this.mouseMove);
     document.removeEventListener("mouseup", this.mouseUp);
-    this.props.moveShape(Number(this.props.id), this.state.x,  this.state.y);
+    this.props.moveShape(this.props.id, this.state.x,  this.state.y);
   }
 
   dbClick(event:MouseEvent) {
     if (event.altKey) {
-      this.props.pushBack(Number(this.props.id));
+      this.props.pushBack(this.props.id);
     } else {
-      this.props.bringForward(Number(this.props.id));
+      this.props.bringForward(this.props.id);
     }
   }
 

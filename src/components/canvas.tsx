@@ -20,15 +20,8 @@ export interface ICanvas extends ICanvasState, ICanvasDispatcher {
 }
 
 class Canvas extends React.Component<ICanvas, {}> {
-  constructor(props?, context?) {
-    super(props, context);
-  }
-
   generateShape(shapeData:IShapeData) {
-    let dispatcher:IShapeDispatcher = {moveShape: this.props.moveShape,
-                      bringForward: this.props.bringForward,
-                      pushBack: this.props.pushBack}
-    return ShapeFactory.createShape(shapeData, dispatcher);
+    return ShapeFactory.createShape(shapeData, this.props);
   }
 
   render() {
@@ -41,7 +34,7 @@ class Canvas extends React.Component<ICanvas, {}> {
     );
   }
 
-  onCanvasDrop(event) {
+  onCanvasDrop(event:DragEvent) {
     event.preventDefault();
     this.props.addShape(
       event.dataTransfer.getData("shape"),
@@ -52,7 +45,7 @@ class Canvas extends React.Component<ICanvas, {}> {
     );
   }
 
-  onCanvasDragOver(event) {
+  onCanvasDragOver(event:DragEvent) {
     event.preventDefault();
   }
 }
